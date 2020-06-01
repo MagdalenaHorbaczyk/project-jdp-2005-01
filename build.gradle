@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.1.1.RELEASE'
+        springBootVersion = '2.1.14.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -29,4 +29,13 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     runtimeOnly('com.h2database:h2')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    implementation('org.springframework.boot:spring-boot-starter-jdbc')
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 }
