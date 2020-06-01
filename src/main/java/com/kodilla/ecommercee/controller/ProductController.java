@@ -1,12 +1,12 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.ProductDto;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/v1/product")
@@ -18,20 +18,20 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-    public ProductDto getProduct(Long productId) {
-        return new ProductDto(1L, "test name", "test desc", 100);
+    public ProductDto getProduct(@RequestParam Long productId) {
+        return new ProductDto(1L, "test name", "test desc", 100, 2L);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createProduct")
-    public void createProduct(ProductDto productDto) {
+    @RequestMapping(method = RequestMethod.POST, value = "createProduct", consumes = APPLICATION_JSON_VALUE)
+    public void createProduct(@RequestBody ProductDto productDto) {
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-    public ProductDto updateProduct(ProductDto productDto) {
-        return new ProductDto(1L, "updated name", "updated desc", 100);
+    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct", consumes = APPLICATION_JSON_VALUE)
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return new ProductDto(1L, "updated name", "updated desc", 100, 3L);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
-    public void deleteProduct(Long productId) {
+    public void deleteProduct(@RequestParam Long productId) {
     }
 }
