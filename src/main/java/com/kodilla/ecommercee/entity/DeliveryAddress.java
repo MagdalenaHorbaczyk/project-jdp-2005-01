@@ -8,20 +8,20 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "DELIVERYADDRESS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class User {
+public class DeliveryAddress {
 
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "USER_ID")
-    private Long userId;
+    @Column(name = "ADDRESS_ID")
+    private Long addressId;
 
     @NotNull
-    @Column(name = "USERNAME")
-    private String username;
+    @Column(name = "ADDRESS")
+    private String address;
 
 }
