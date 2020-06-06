@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,8 +17,15 @@ import javax.persistence.Table;
 public class User {
 
     @Id
+    @NotNull
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
-    private String name;
+    private String login;
+
+    private String userKey;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
 }
