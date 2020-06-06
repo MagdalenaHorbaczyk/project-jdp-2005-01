@@ -19,8 +19,16 @@ import javax.persistence.Table;
 public class User {
 
     @Id
+    @NotNull
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
-    private String name;
+    @Column("USER_NAME")
+    private String login;
+
+    private String userKey;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
 }
