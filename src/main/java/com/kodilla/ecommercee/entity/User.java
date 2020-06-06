@@ -23,7 +23,6 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @Column("USER_NAME")
     private String login;
 
     private String userKey;
