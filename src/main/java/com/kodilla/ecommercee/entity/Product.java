@@ -8,18 +8,18 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "PRODUCTS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User {
+public class Product {
 
     @Id
     @NotNull
     @GeneratedValue
-    private Long userId;
+    private Long productId;
 
     @NotNull
-    private String username;
+    private String name;
 
 }
