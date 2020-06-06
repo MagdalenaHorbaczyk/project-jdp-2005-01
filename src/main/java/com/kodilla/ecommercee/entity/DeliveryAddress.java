@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -11,17 +12,15 @@ import javax.validation.constraints.NotNull;
 @Table(name = "DELIVERYADDRESS")
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
+@Data
 public class DeliveryAddress {
 
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "ADDRESS_ID")
     private Long addressId;
 
     @NotNull
-    @Column(name = "ADDRESS")
     private String address;
 
 }
