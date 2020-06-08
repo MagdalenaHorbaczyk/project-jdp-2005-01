@@ -34,7 +34,7 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Cart> carts = new ArrayList<>();
 
 }
