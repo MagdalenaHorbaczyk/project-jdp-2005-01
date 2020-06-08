@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Product {
 
     private String description;
 
-    private double price;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
@@ -35,8 +36,5 @@ public class Product {
 
     @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
     private List<Cart> carts = new ArrayList<>();
-
-    @OneToMany
-    private List<OrderPosition> orderPositions = new ArrayList<>();
 
 }
