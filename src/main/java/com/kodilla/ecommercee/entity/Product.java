@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -15,11 +16,19 @@ import javax.validation.constraints.NotNull;
 public class Product {
 
     @Id
-    @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
 
     @NotNull
     private String name;
 
+    @NotNull
+    private String description;
+
+    @NotNull
+    private BigDecimal price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
 }
