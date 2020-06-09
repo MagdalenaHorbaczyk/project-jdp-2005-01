@@ -47,7 +47,8 @@ public class DeliveryAddress {
     @OneToMany (
             mappedBy = "deliveryAddress",
             targetEntity = Order.class,
-            fetch = FetchType.EAGER
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.MERGE
     )
     private List<Order> orders = new ArrayList<>();
 
