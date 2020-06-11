@@ -20,13 +20,10 @@ public class User {
     private Long userId;
 
     @NotNull
-    private String userName;
+    private String username;
 
     @NotNull
     private String userKey;
-
-    @NotNull
-    private String deliveryAddressId;
 
     @OneToMany(
             targetEntity = Order.class,
@@ -36,17 +33,11 @@ public class User {
     )
     private List<Order> orders = new ArrayList<>();
 
-    @OneToOne(
-            targetEntity = Cart.class,
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private Long cartId;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CART_ID")
+    private Cart cart;
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 }
-
-
 

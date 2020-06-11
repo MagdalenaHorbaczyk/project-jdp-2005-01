@@ -2,7 +2,6 @@ package com.kodilla.ecommercee.domain;
 
 import com.kodilla.ecommercee.entity.UserStatus;
 import lombok.*;
-
 import java.util.List;
 
 @AllArgsConstructor
@@ -11,10 +10,9 @@ import java.util.List;
 public class UserDto {
 
     private Long userId;
-    private String userName;
+    private String username;
     private String userKey;
-    private String deliveryAddressId;
     private List<OrderDto> orders;
-    private Long cartId;
+    private int cartId;
     private UserStatus status;
 }
