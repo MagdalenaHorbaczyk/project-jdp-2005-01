@@ -18,7 +18,7 @@ public class CartController {
         List<ProductDto> Cart = new ArrayList<>();
         Cart.add(new ProductDto(1L, "Masło", "Masełko", 4.20, 100L));
         Cart.add(new ProductDto(2L, "Mleko", "Mleko", 2.30, 200L));
-        Cart.add(new ProductDto(3L, "Ser", "Ser", 12.50, 300L));
+        Cart.add(new ProductDto(3L, "Ser ", "Ser", 12.50, 300L));
         return Cart;
     }
 
