@@ -1,24 +1,18 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import com.kodilla.ecommercee.entity.UserStatus;
+import lombok.*;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class UserDto {
 
     private Long userId;
-    private String name;
-    private Integer status;
-    private Integer userKey;
+    private String username;
+    private String userKey;
     private List<OrderDto> orders;
     private Long cartId;
-    private String deliveryAdresId;
-
+    private UserStatus status;
 }
