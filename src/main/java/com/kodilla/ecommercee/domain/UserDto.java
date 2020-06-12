@@ -13,6 +13,6 @@ public class UserDto {
     private String username;
     private String userKey;
     private List<OrderDto> orders;
-    private int cartId;
+    private Long cartId;
     private UserStatus status;
 }

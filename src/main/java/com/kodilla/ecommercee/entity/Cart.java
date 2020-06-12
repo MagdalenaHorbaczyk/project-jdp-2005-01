@@ -19,7 +19,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     @Column(name = "CART_ID", unique = true)
-    private int cartId;
+    private Long cartId;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -29,7 +29,4 @@ public class Cart {
     )
     private List<Product> products = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "USER_ID")
-    User user;
 }
