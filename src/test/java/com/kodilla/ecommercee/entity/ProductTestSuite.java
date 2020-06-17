@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.entity;
 
+import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import org.junit.Assert;
