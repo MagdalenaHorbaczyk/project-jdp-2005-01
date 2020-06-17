@@ -17,10 +17,10 @@ import java.time.LocalDate;
 public class OrderPositionTestSuite {
 
     @Autowired
-    OrderPositionRepository orderPositionRepository;
+    private OrderPositionRepository orderPositionRepository;
 
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
 
 
     @Test
@@ -53,11 +53,9 @@ public class OrderPositionTestSuite {
         //When:
         orderPositionRepository.save(orderPosition);
         Long orderPositionId = orderPosition.getOrderPositionId();
-        OrderPosition fetchedPosition = orderPositionRepository.findById(orderPositionId).orElse(null);
 
         //Then:
-        String name = fetchedPosition.getName();
-        Assert.assertNotNull(name);
+        Assert.assertNotNull(orderPositionRepository.findById(orderPositionId));
 
         //Clean-up:
         orderPositionRepository.deleteById(orderPositionId);
@@ -72,19 +70,15 @@ public class OrderPositionTestSuite {
         orderPosition.setPrice(new BigDecimal("299"));
         orderPosition.setQuantity(2);
 
-        //(save & retreive object in/from database)
         orderPositionRepository.save(orderPosition);
         Long orderPositionId = orderPosition.getOrderPositionId();
         OrderPosition fetchedPosition = orderPositionRepository.findById(orderPositionId).orElse(null);
-
-        // (store initial name)
+        assert fetchedPosition != null;
         String initialName = fetchedPosition.getName();
 
-        //When: (update the name)
+        //When:
         fetchedPosition.setName("nike");
         orderPositionRepository.save(fetchedPosition);
-
-        // (store updated name)
         String updatedName = fetchedPosition.getName();
 
         //Then:
@@ -189,7 +183,6 @@ public class OrderPositionTestSuite {
         Assert.assertFalse(orderRepository.existsById(orderId));
         Assert.assertFalse(orderPositionRepository.existsById(orderPositionId));
 
-        //Clean-up:
     }
 
 
