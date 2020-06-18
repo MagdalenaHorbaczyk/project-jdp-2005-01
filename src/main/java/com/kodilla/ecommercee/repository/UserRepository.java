@@ -3,7 +3,8 @@ package com.kodilla.ecommercee.repository;
 import com.kodilla.ecommercee.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.Transactional;
 
 @Repository
 @Transactional
