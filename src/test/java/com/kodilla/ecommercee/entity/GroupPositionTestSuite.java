@@ -86,6 +86,7 @@ public class GroupPositionTestSuite {
 
     @Test
     public void DeleteGroup() {
+
         //Given
         Group TestGroupFirst = new Group();
         TestGroupFirst.setName("Telewizor");
