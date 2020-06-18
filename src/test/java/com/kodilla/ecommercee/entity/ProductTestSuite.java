@@ -59,7 +59,6 @@ public class ProductTestSuite {
         product3.setName("Koszula");
         productRepository.save(product3);
         String name = product3.getName();
-        System.out.println(name);
         Long product3Id = product3.getId();
         Product position = productRepository.findById(product3Id).orElse(null);
         //When
@@ -80,9 +79,8 @@ public class ProductTestSuite {
         //When
         productRepository.save(product4);
         Long product4Id = product4.getId();
-        String savedName = product4.getName();
         //Then
-        Assert.assertNotNull(savedName);
+        Assert.assertNotNull(product4Id);
         //Clean-up
         productRepository.deleteById(product4Id);
     }
@@ -92,9 +90,11 @@ public class ProductTestSuite {
         Product product5 = new Product();
         product5.setName("Marynarka");
         productRepository.save(product5);
+
         Product product6 = new Product();
         product6.setName("Spodnie jeans");
         productRepository.save(product6);
+
         Product product7 = new Product();
         product7.setName("Kurtka");
         productRepository.save(product7);
@@ -106,26 +106,33 @@ public class ProductTestSuite {
         productRepository.deleteAll();
     }
     @Test
-    public void productGroupCartTest() {
+    public void productInGroupAndCartTest() {
         //Given
         Product product8 = new Product();
         product8.setName("Koszula");
         Product product9 = new Product();
         product9.setName("Spodnie");
+
         Cart cart1 = new Cart();
-        cartRepository.save(cart1);
-        cart1.getProducts().add(product8);
-        cart1.getProducts().add(product9);
+
         Group group1 = new Group();
         group1.setName("Odzież");
+        //When
+        productRepository.save(product8);
+        productRepository.save(product9);
+        cartRepository.save(cart1);
         groupRepository.save(group1);
+
+        cart1.getProducts().add(product8);
+        cart1.getProducts().add(product9);
+        product8.getCarts().add(cart1);
+        product9.getCarts().add(cart1);
+
         group1.getProducts().add(product8);
         group1.getProducts().add(product9);
         product8.setGroup(group1);
         product9.setGroup(group1);
-        //When
-        productRepository.save(product8);
-        productRepository.save(product9);
+
         Long product8Id = product8.getId();
         Long product9Id = product9.getId();
         String group1Name = group1.getName();
@@ -145,55 +152,83 @@ public class ProductTestSuite {
         cartRepository.deleteById(cart1Id);
     }
     @Test
-    public void deleteProductGroupCartTest() {
+    public void deleteCartTest() {
         //Given
-        Product product10 = new Product();
-        product10.setName("Koszula");
+        Product product9 = new Product();
+        product9.setName("Koszula");
+        productRepository.save(product9);
+
         Cart cart = new Cart();
         cartRepository.save(cart);
-        Group group = new Group();
-        group.setName("Odzież");
-        groupRepository.save(group);
-        group.getProducts().add(product10);
-        cart.getProducts().add(product10);
-        product10.setGroup(group);
-        productRepository.save(product10);
-        Long product10Id = product10.getId();
-        Long groupId = group.getGroupId();
+        product9.getCarts().add(cart);
+        cart.getProducts().add(product9);
+
+        Long product9Id = product9.getId();
         Long cartId = cart.getCartId();
         //When
         cartRepository.deleteById(cartId);
         //Then
         Assert.assertFalse(cartRepository.existsById(cartId));
-        Assert.assertTrue(groupRepository.existsById(groupId));
-        Assert.assertTrue(productRepository.existsById(product10Id));
+        Assert.assertTrue(productRepository.existsById(product9Id));
+        Assert.assertNotNull(product9Id);
         //Clean-up
-        productRepository.deleteById(product10Id);
-        groupRepository.deleteById(groupId);
+        productRepository.deleteById(product9Id);
     }
     @Test
-    public void getProductInCartTest(){
+    public void deleteGroupTest() {
         //Given
-        Product product12 = new Product();
-        product12.setName("Koszula krótki rekaw");
-        Product product13 = new Product();
-        product13.setName("Spodnie wizytowe");
+        Product product10 = new Product();
+        product10.setName("Koszula");
+        productRepository.save(product10);
+
         Group group = new Group();
         group.setName("Odzież");
         groupRepository.save(group);
-        product12.setGroup(group);
-        product13.setGroup(group);
-        Cart cart = new Cart();
-        cart.getProducts().add(product12);
-        cart.getProducts().add(product13);
+        group.getProducts().add(product10);
+        product10.setGroup(group);
+
+        Long product10Id = product10.getId();
+        Long groupId = group.getGroupId();
         //When
-        cartRepository.save(cart);
-        Long id = cart.getCartId();
+        groupRepository.deleteById(groupId);
         //Then
-        Assert.assertNotNull(id);
+        Assert.assertFalse(groupRepository.existsById(groupId));
+        Assert.assertTrue(productRepository.existsById(product10Id));
         //Clean-up
-        cartRepository.deleteById(id);
-        groupRepository.delete(group);
+        productRepository.deleteById(product10Id);
+    }
+
+    @Test
+    public void deleteProductFromCartAndGroupTest() {
+        //Given
+        Product product11 = new Product();
+        product11.setName("Koszula");
+        productRepository.save(product11);
+
+        Group group = new Group();
+        group.setName("Odzież");
+        groupRepository.save(group);
+        group.getProducts().add(product11);
+        product11.setGroup(group);
+
+        Cart cart = new Cart();
+        cartRepository.save(cart);
+        product11.getCarts().add(cart);
+        cart.getProducts().add(product11);
+
+        Long product11Id = product11.getId();
+        Long groupId = group.getGroupId();
+        Long cartId = cart.getCartId();
+        //When
+        productRepository.deleteById(product11Id);
+        //Then
+        Assert.assertFalse(productRepository.existsById(product11Id));
+        Assert.assertTrue(groupRepository.existsById(groupId));
+        Assert.assertTrue(cartRepository.existsById(cartId));
+        //Clean-up
+        groupRepository.deleteById(groupId);
+        cartRepository.deleteById(cartId);
     }
 }
+
 
