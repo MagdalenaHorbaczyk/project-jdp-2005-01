@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class User {
     @GeneratedValue
     private Long userId;
 
+    @NotNull
     private String username;
 
     private String userKey;
@@ -36,6 +38,4 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-
 }
-
