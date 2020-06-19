@@ -33,7 +33,7 @@ public class GroupPositionTestSuite {
         Long TestGroupId = TestGroup.getGroupId();
 
         //Then
-        assertEquals(1, (long) TestGroupId);
+        Assert.assertEquals(1, (long) TestGroupId);
 
         //Clean-up:
         groupRepository.deleteById(TestGroupId);
