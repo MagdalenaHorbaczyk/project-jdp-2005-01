@@ -39,35 +39,6 @@ public class GroupPositionTestSuite {
     }
 
     @Test
-    public void testSaveGroupWithProducts() {
-        //Given
-        Product firstProduct = new Product();
-        firstProduct.setName("Produkt_jeden");
-
-        Product secondProduct = new Product();
-        secondProduct.setName("Produkt_Drugi");
-
-        List<Product> ProductLista = new ArrayList<>();
-        ProductLista.add(firstProduct);
-        ProductLista.add(secondProduct);
-
-        Group allProductsGroup = new Group();
-        allProductsGroup.setProducts(ProductLista);
-        allProductsGroup.setName("ListaProduktow");
-        //When
-        groupRepository.save(allProductsGroup);
-        Long testGroupId = allProductsGroup.getGroupId();
-
-        //Then
-        Assert.assertEquals(2, groupRepository.findById(testGroupId).get().getProducts().size());
-
-        //Clean-up:
-        groupRepository.deleteById(testGroupId);
-    }
-
-
-
-    @Test
     public void FindGroup() {
         //Given
         Group TestGroupFirst = new Group();
