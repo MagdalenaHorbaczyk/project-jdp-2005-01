@@ -3,10 +3,9 @@ package com.kodilla.ecommercee.repository;
 import com.kodilla.ecommercee.entity.Cart;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-
-@Transactional
 @Repository
+@Transactional
 public interface CartRepository extends CrudRepository<Cart, Long> {
 }
