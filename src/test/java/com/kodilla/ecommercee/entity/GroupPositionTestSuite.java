@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(SpringRunner.class)
@@ -22,58 +23,80 @@ public class GroupPositionTestSuite {
 
     @Test
     public void SaveGroup() {
-        Group TestGroup = new Group();
-        List<Product> ProductList = new ArrayList<>();
-        TestGroup.setProducts(ProductList);
-        TestGroup.setName("Masełko");
+        //Given
+        Group testGroup = new Group();
+        List<Product> productList = new ArrayList<>();
+        testGroup.setProducts(productList);
+        testGroup.setName("Masełko");
 
         //When
-        groupRepository.save(TestGroup);
-        Long TestGroupId = TestGroup.getGroupId();
+        groupRepository.save(testGroup);
+        Long testGroupId = testGroup.getGroupId();
 
         //Then
-        Assert.assertEquals(1, (long) TestGroupId);
+        assertEquals(1, (long) testGroupId);
 
         //Clean-up:
-        groupRepository.deleteById(TestGroupId);
+        groupRepository.deleteById(testGroupId);
     }
 
     @Test
     public void FindGroup() {
         //Given
-        Group TestGroupFirst = new Group();
-        TestGroupFirst.setName("Telewizor");
-        Group TestGroupSecond = new Group();
-        TestGroupSecond.setName("Komputer");
+        Group testGroupFirst = new Group();
+        testGroupFirst.setName("Telewizor");
+        Group testGroupSecond = new Group();
+        testGroupSecond.setName("Komputer");
 
         //When
-        groupRepository.save(TestGroupFirst);
-        Long TestGroupFirstId = TestGroupFirst.getGroupId();
-        groupRepository.save(TestGroupSecond);
-        Long TestGroupSecondId = TestGroupSecond.getGroupId();
+        groupRepository.save(testGroupFirst);
+        Long testGroupFirstId = testGroupFirst.getGroupId();
+        groupRepository.save(testGroupSecond);
+        Long testGroupSecondId = testGroupSecond.getGroupId();
 
         //Then
-        Assert.assertTrue(groupRepository.existsById(TestGroupFirstId));
+        Assert.assertTrue(groupRepository.existsById(testGroupFirstId));
 
         //Clean-up:
-        groupRepository.deleteById(TestGroupFirstId);
-        groupRepository.deleteById(TestGroupSecondId);
+        groupRepository.deleteById(testGroupFirstId);
+        groupRepository.deleteById(testGroupSecondId);
     }
 
     @Test
     public void DeleteGroup() {
-
         //Given
-        Group TestGroupFirst = new Group();
-        TestGroupFirst.setName("Telewizor");
-        groupRepository.save(TestGroupFirst);
+        Group testGroupFirst = new Group();
+        testGroupFirst.setName("Telewizor");
+        groupRepository.save(testGroupFirst);
 
         //When
-        Long TestGroupFirstId = TestGroupFirst.getGroupId();
+        Long testGroupFirstId = testGroupFirst.getGroupId();
+        groupRepository.deleteById(testGroupFirstId);
 
         //Then
-        groupRepository.deleteById(TestGroupFirstId);
-        Assert.assertFalse(groupRepository.existsById(TestGroupFirstId));
+        Assert.assertFalse(groupRepository.existsById(testGroupFirstId));
+    }
+
+    @Test
+    public void UpdateGroup(){
+        //Given
+        long zeroSaves = groupRepository.count();
+        Group group = new Group();
+        group.setName("Buciki");
+        groupRepository.save(group);
+
+        //When
+        Group firstSave= new Group();
+        firstSave.setGroupId(group.getGroupId());
+        firstSave.setName("Adidasy");
+        groupRepository.save(firstSave);
+
+        //Then
+        long nextNumOfRecords = groupRepository.count();
+        assertEquals(1,nextNumOfRecords - zeroSaves);
+
+        //Clean Up
+        groupRepository.deleteById(group.getGroupId());
     }
 }
 
