@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.exception.GroupNotFoundException;
 import com.kodilla.ecommercee.exception.ProductNotFoundException;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.ProductService;
@@ -50,6 +51,11 @@ public class ProductController {
             throw new ProductNotFoundException();
         }
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "setGroup")
+    public void setGroup(@RequestParam Long productId, @RequestParam Long groupId) throws ProductNotFoundException, GroupNotFoundException {
+        productService.setProductGroup(productId, groupId);
+    } // ta metoda wymaga sprawdzenia czy działa, gdy będzie już dostępny GroupController wraz ze swoimi metodami, serwisem, dto itp.
 
 
 }
