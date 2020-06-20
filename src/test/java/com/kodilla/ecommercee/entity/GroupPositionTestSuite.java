@@ -97,6 +97,7 @@ public class GroupPositionTestSuite {
 
         //Clean Up
         groupRepository.deleteById(group.getGroupId());
+
     }
 }
 
