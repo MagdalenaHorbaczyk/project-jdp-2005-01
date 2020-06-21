@@ -1,21 +1,17 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.entity.Product;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class CartDto {
-
-    private Long id;
-    private List<ProductDto> products = new ArrayList<>();
-    private Long UserId ;
+    private Long cartId;
+    private List<Product> products = new ArrayList<>();
 }
