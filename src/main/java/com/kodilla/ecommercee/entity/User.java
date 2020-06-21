@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +18,8 @@ public class User {
     @GeneratedValue
     private Long userId;
 
-    @NotNull
     private String username;
 
-    @NotNull
     private String userKey;
 
     @OneToMany(
@@ -35,9 +32,10 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "CART_ID")
-    private Cart cart;
+    private Cart cartId;
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
 }
 
