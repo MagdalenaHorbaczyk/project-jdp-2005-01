@@ -40,7 +40,7 @@ public class UserTestSuite {
         Assert.assertNotEquals(0, idUserAnna);
 
         //CleanUp
-        userRepository.deleteById(idUserAnna);
+        userRepository.deleteAll();
     }
 }
 
