@@ -18,6 +18,7 @@ public class GroupPositionTestSuite {
     @Autowired
     private GroupRepository groupRepository;
 
+
     @Test
     public void SaveGroup() {
         //Given
