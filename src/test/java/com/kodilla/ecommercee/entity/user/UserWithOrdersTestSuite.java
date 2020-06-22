@@ -62,6 +62,31 @@ public class UserWithOrdersTestSuite {
         //CleanUp
         userRepository.deleteById(idUserAnna);
     }
+
+    @Test
+    public void testUserWithOrdersDelete() {
+        User userAnna = new User();
+        userAnna.setUsername("Anna");
+        userAnna.setUserKey("01");
+
+        Order order1 = new Order();
+        order1.setCreationDate(LocalDate.now());
+        order1.setStatus("In progress");
+        order1.setDeliveryMethod("GLS");
+        order1.setPaymentMethod("cash");
+
+        userAnna.getOrders().add(order1);
+        order1.setUser(userAnna);
+
+        userRepository.save(userAnna);
+        long idUserAnna = userAnna.getUserId();
+
+        //When
+
+
+
+
+    }
 }
 
 
