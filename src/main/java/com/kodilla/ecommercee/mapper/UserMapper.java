@@ -14,7 +14,7 @@ public class UserMapper {
                 userDto.getUsername(),
                 userDto.getUserKey(),
                 userDto.getOrders(),
-                userDto.getCartId(),
+                userDto.getCart(),
                 userDto.getStatus());
     }
 
@@ -24,14 +24,14 @@ public class UserMapper {
                 user.getUsername(),
                 user.getUserKey(),
                 user.getOrders(),
-                user.getCartId(),
+                user.getCart(),
                 user.getStatus());
     }
 
     public List<UserDto> mapToUserDtoList(List<User> userList) {
         return userList.stream()
                 .map(u -> new UserDto(u.getUserId(), u.getUsername(), u.getUserKey(), u.getOrders(),
-                        u.getCartId(), u.getStatus()))
+                        u.getCart(), u.getStatus()))
                 .collect(Collectors.toList());
     }
 }
