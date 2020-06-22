@@ -8,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.util.ArrayList;
-import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 
@@ -23,20 +21,15 @@ public class GroupPositionTestSuite {
     @Test
     public void SaveGroup() {
         //Given
-        Group testGroup = new Group();
-        List<Product> productList = new ArrayList<>();
-        testGroup.setProducts(productList);
-        testGroup.setName("Masełko");
-
+        Group testGroupFirst = new Group();
+        testGroupFirst.setName("pierwszaGrupa");
         //When
-        groupRepository.save(testGroup);
-        Long testGroupId = testGroup.getGroupId();
-
+        groupRepository.save(testGroupFirst);
+        Long testGroupFirstId = testGroupFirst.getGroupId();
         //Then
-        assertEquals(1, (long) testGroupId);
-
+        Assert.assertTrue(groupRepository.existsById(testGroupFirstId));
         //Clean-up:
-        groupRepository.deleteById(testGroupId);
+        groupRepository.deleteById(testGroupFirstId);
     }
 
     @Test
