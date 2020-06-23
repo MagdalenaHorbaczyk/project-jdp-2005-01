@@ -16,12 +16,14 @@ import java.util.List;
 public class User {
 
     @Id
+    @NotNull
     @GeneratedValue
     private Long userId;
 
     @NotNull
     private String username;
 
+    @NotNull
     private String userKey;
 
     @OneToMany(
@@ -34,8 +36,11 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "CART_ID")
-    private Cart cartId;
+    private Cart cart;
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 }
+
+
+
