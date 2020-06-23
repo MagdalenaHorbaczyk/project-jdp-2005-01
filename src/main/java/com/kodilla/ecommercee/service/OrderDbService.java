@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.entity.Order;
+import com.kodilla.ecommercee.exception.OrderNotFoundException;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,11 @@ public class OrderDbService {
         return orderRepository.save(order);
     }
 
-    public Optional<Order> getOrder(final Long id) {
-        return orderRepository.findById(id);
+    public Order getOrder(Long id) throws OrderNotFoundException {
+        return orderRepository.findById(id).orElseThrow(OrderNotFoundException::new);
     }
+
+
 
     public void deleteOrder(final Long id) {
         orderRepository.deleteById(id);

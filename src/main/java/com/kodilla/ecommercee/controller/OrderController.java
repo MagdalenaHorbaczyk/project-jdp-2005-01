@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.OrderPositionDto;
 import com.kodilla.ecommercee.entity.OrderPosition;
+import com.kodilla.ecommercee.exception.OrderNotFoundException;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.mapper.OrderPositionMapper;
 import com.kodilla.ecommercee.repository.OrderPositionRepository;
@@ -34,8 +35,8 @@ public class OrderController {
         return orderMapper.mapToOrderDtoList(orderDbService.getAllOrders());
     }
     @RequestMapping(method = RequestMethod.GET, value = "getOrder")
-    public OrderDto getOrder(@RequestParam Long orderId) {
-        return orderMapper.mapToOrderDto(orderDbService.getOrder(orderId);
+    public OrderDto getOrder(@RequestParam Long orderId) throws OrderNotFoundException {
+        return orderMapper.mapToOrderDto(orderDbService.getOrder(orderId));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder", consumes = APPLICATION_JSON_VALUE)
