@@ -114,7 +114,6 @@ public class UserWithCartTestSuite {
 
         //CleanUp
         userRepository.deleteById(userId);
-
     }
 }
 

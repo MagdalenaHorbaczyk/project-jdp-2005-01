@@ -136,6 +136,7 @@ public class UserWithOrdersTestSuite {
 
         //CleanUp
         userRepository.deleteById(idUserAnna);
+
     }
 }
 

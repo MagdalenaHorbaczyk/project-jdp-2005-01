@@ -41,6 +41,7 @@ public class UserTestSuite {
 
         //CleanUp
         userRepository.deleteAll();
+
     }
 }
 
