@@ -43,7 +43,6 @@ public class UserWithCartTestSuite {
 
         List<Cart> carts = cartRepository.findAll();
 
-
         //Then
         Assert.assertNotEquals(0, idUserAnna);
         Assert.assertNotEquals(0, idCartAnna);
@@ -82,13 +81,42 @@ public class UserWithCartTestSuite {
     }
 
     @Test
-    public void testUserWithCartUpdate() {//teraz to
+    public void testUserWithCartUpdate() {
+        //Given
+        User user = new User();
+        user.setUsername("Maja");
+        user.setUserKey("01");
+
+        Cart cart = new Cart();
+        user.setCart(cart);
+
+        userRepository.save(user);
+        Long userId = user.getUserId();
+        String userName = user.getUsername();
+        String userKey = user.getUserKey();
+
+        //When
+        User modified = userRepository.findById(userId).orElse(null);
+        modified.setUsername("Joanna");
+        modified.setUserKey("02");
+
+        modified.setCart(cart);
+
+        userRepository.save(modified);
+        String userName2 = modified.getUsername();
+        String userKey2 = modified.getUserKey();
+
+        //Then
+        Assert.assertNotEquals(userName, userName2);
+        Assert.assertNotEquals(userKey, userKey2);
+        Assert.assertNotNull(modified);
+        Assert.assertEquals(1, userRepository.count());
+
+        //CleanUp
+        userRepository.deleteById(userId);
+
     }
 }
-
-
-
-
 
 
 
