@@ -16,6 +16,6 @@ public class UserDto {
     private String username;
     private String userKey;
     private List<Order> orders;
-    private Cart cartId;
+    private Cart cart;
     private UserStatus status;
 }

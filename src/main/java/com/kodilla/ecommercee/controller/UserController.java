@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.UserDto;
-import com.kodilla.ecommercee.exception.UserNotFoundException;
+import com.kodilla.ecommercee.exception.*;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class UserController {
     public UserDto getUser(@RequestParam Long userId) throws UserNotFoundException {
         return userMapper.mapToUserDto(userDbService.getUser(userId).orElseThrow(UserNotFoundException::new));
     }
-    @RequestMapping (method = RequestMethod.PUT, value = "updateUser")
+    @RequestMapping (method = RequestMethod.PUT, value = "updateUser", consumes = APPLICATION_JSON_VALUE)
     public UserDto updateUser(@RequestBody UserDto userDto) {
         return userMapper.mapToUserDto(userDbService.saveUser(userMapper.mapToUser(userDto)));
     }
@@ -38,11 +38,25 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
-    public void deleteUser(@RequestParam Long userId) throws UserNotFoundException{
+    public void deleteUser(@RequestParam Long userId) throws UserNotFoundException {
         if (userDbService.isExist(userId)) {
             userDbService.deleteUser(userId);
-        }else{
+        } else {
             throw new UserNotFoundException();
         }
+    }
+    @RequestMapping(method = RequestMethod.GET, value = "userStatus")
+    public void isExist(@RequestParam Long userId){
+        userDbService.isExist(userId);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "setCart")
+    public void setCart(@RequestParam Long userId, @RequestParam Long cartId) throws UserNotFoundException, CartNotFoundException {
+        userDbService.setUserCart(userId, cartId);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "setOrderList")
+    public void setOrder(@RequestParam Long userId, @RequestParam Long orderId) throws UserNotFoundException, OrderNotFoundException {
+        userDbService.setOrdersToUser(userId, orderId);
     }
 }
