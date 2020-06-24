@@ -28,9 +28,6 @@ public class OrderPosition {
     private int quantity;
 
     @ManyToOne
-    private Product product;
-
-    @ManyToOne
     private Order order;
 
 }

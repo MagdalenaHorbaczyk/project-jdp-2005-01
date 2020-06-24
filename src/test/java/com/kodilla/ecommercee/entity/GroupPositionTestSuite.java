@@ -29,6 +29,7 @@ public class GroupPositionTestSuite {
         Long testGroupFirstId = testGroupFirst.getGroupId();
         //Then
         Assert.assertTrue(groupRepository.existsById(testGroupFirstId));
+    
         //Clean-up:
         groupRepository.deleteById(testGroupFirstId);
     }
